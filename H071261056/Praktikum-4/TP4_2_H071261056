@@ -1,0 +1,30 @@
+#Soal Nomor 2
+#Note: Implementasikan penerimaan nilai menggunakan Arbitrary Arguments (*args), lalu kembalikan rata-rata, nilai tertinggi, dan nilai terendah sekaligus dari satu function.
+#Format Input: nilai (int/float). Input yang dikosongkan menandakan input selesai.
+#Format Output: "Masukkan nilai ujian siswa (kosongkan untuk selesai):
+#". Jika ada data: "Rata-rata kelas: <rata>", "Nilai tertinggi: <tertinggi>",
+# "Nilai terendah: <terendah>". Jika tidak ada data: "Data nilai tidak tersedia." 
+def rekap_nilai(*args):
+    rata_rata = sum(args) / len(args)
+    tertinggi = max(args)
+    terendah = min(args)
+    return rata_rata, tertinggi, terendah
+
+kumpulan_nilai = []
+
+while True:
+    input_nilai = input("Masukkan nilai ujian siswa (kosongkan untuk selesai): ")
+    if input_nilai == "":
+        break
+    kumpulan_nilai.append(float(input_nilai))
+
+if len(kumpulan_nilai) == 0:
+    print("Data nilai tidak tersedia.")
+else:
+    # Membongkar list kumpulan_nilai menjadi argumen terpisah menggunakan *
+    rata, tertinggi, terendah = rekap_nilai(*kumpulan_nilai)
+    
+    # Format agar output .0 kalau bulat tetap muncul sesuai contoh
+    print(f"Rata-rata kelas: {rata}")
+    print(f"Nilai tertinggi: {int(tertinggi) if tertinggi.is_integer() else tertinggi}")
+    print(f"Nilai terendah: {int(terendah) if terendah.is_integer() else terendah}")
